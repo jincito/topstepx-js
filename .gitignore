@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+*.local
+
+# API docs (private reference)
+docs/
+
+# Planning docs (local only)
+.planning/

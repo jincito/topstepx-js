@@ -1,0 +1,80 @@
+{
+  "name": "topstepx",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the TopstepX trading API — REST, WebSocket, and React hooks",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "topstepx",
+    "topstep",
+    "trading",
+    "futures",
+    "api",
+    "sdk",
+    "typescript",
+    "signalr",
+    "websocket",
+    "react-hooks"
+  ],
+  "author": "mizu-trading",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizu-trading/topstepx-js.git"
+  },
+  "homepage": "https://github.com/mizu-trading/topstepx-js#readme",
+  "bugs": {
+    "url": "https://github.com/mizu-trading/topstepx-js/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint:pkg": "publint && attw --pack . --ignore-rules cjs-resolves-to-esm no-resolution",
+    "prepublishOnly": "npm run build && npm run lint:pkg"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "latest",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "jsdom": "^28.0.0",
+    "publint": "latest",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "@microsoft/signalr": "^10.0.0",
+    "p-queue": "^9.1.0",
+    "p-retry": "^7.1.1"
+  }
+}
