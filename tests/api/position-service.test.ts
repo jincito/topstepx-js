@@ -61,7 +61,7 @@ describe('PositionService', () => {
       const request = { accountId: 1, contractId: 'CON.F.US.ENQ.U25' };
       const result = await service.closeContract(request);
 
-      expect(http.post).toHaveBeenCalledWith('/api/Position/closeContract', request);
+      expect(http.post).toHaveBeenCalledWith('/api/Position/closeContract', request, { retries: 0 });
       expect(result).toBeUndefined();
     });
   });
@@ -78,7 +78,7 @@ describe('PositionService', () => {
       const request = { accountId: 1, contractId: 'CON.F.US.ENQ.U25', size: 1 };
       const result = await service.partialCloseContract(request);
 
-      expect(http.post).toHaveBeenCalledWith('/api/Position/partialCloseContract', request);
+      expect(http.post).toHaveBeenCalledWith('/api/Position/partialCloseContract', request, { retries: 0 });
       expect(result).toBeUndefined();
     });
   });

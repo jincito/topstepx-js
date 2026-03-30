@@ -41,7 +41,7 @@ describe('OrderService', () => {
       };
       const result = await service.place(request);
 
-      expect(http.post).toHaveBeenCalledWith('/api/Order/place', request);
+      expect(http.post).toHaveBeenCalledWith('/api/Order/place', request, { retries: 0 });
       expect(result).toBe(9056);
     });
   });

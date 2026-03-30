@@ -4,6 +4,10 @@ import { RateLimiter } from './rate-limiter.js';
 import { ApiError, AuthError, RateLimitError, ConnectionError } from '../errors/index.js';
 import type { ApiResponse } from '../types/common.js';
 
+interface PostOptions {
+  retries?: number;
+}
+
 export class HttpClient {
   private auth: AuthManager;
   private rateLimiter: RateLimiter;
@@ -15,7 +19,13 @@ export class HttpClient {
     this.rateLimiter = new RateLimiter();
   }
 
-  async post<T extends ApiResponse>(endpoint: string, body?: unknown): Promise<T> {
+  async post<T extends ApiResponse>(
+    endpoint: string,
+    body?: unknown,
+    options: PostOptions = {},
+  ): Promise<T> {
+    const retries = options.retries ?? 3;
+
     return this.rateLimiter.execute(endpoint, () =>
       pRetry(
         async () => {
@@ -55,8 +65,8 @@ export class HttpClient {
           return data;
         },
         {
-          retries: 3,
-          shouldRetry: ({ error }) => error instanceof RateLimitError,
+          retries,
+          shouldRetry: ({ error }) => retries > 0 && error instanceof RateLimitError,
           minTimeout: 1_000,
           factor: 2,
           randomize: true,

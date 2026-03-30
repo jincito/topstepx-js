@@ -28,6 +28,7 @@ export class PositionService {
     await this.http.post<ClosePositionResponse>(
       '/api/Position/closeContract',
       request,
+      { retries: 0 },
     );
   }
 
@@ -35,6 +36,7 @@ export class PositionService {
     await this.http.post<PartialClosePositionResponse>(
       '/api/Position/partialCloseContract',
       request,
+      { retries: 0 },
     );
   }
 }

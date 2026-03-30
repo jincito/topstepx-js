@@ -23,6 +23,7 @@ export class OrderService {
     const response = await this.http.post<PlaceOrderResponse>(
       '/api/Order/place',
       request,
+      { retries: 0 },
     );
     return response.orderId;
   }
